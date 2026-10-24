@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio33 - Web Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Open+Sans:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/e33-custom.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="icon" href="assets/images/favicon.png">
+</head>
+<body>
+    <!-- Header will be injected via JavaScript -->
+    <nav id="e33-navbar-placeholder"></nav>
+    
+    <main class="container my-5"></main>
+    
+    <!-- Footer will be injected via JavaScript -->
+    <footer id="e33-footer-placeholder"></footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Function to load an HTML file and inject it into a target element
+        function loadInclude(url, targetId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(targetId).innerHTML = data;
+                    // Re-initialize language flags after header loads
+                    initLanguageFlags();
+                })
+                .catch(error => console.error(`Error loading ${url}:`, error));
+        }
+        
+        // Initialize language flags (called after includes load)
+        function initLanguageFlags() {
+            const savedLang = localStorage.getItem('e33-language');
+            if (savedLang) {
+                document.documentElement.lang = savedLang;
+                const usBtn = document.querySelector('.lang-btn.us-flag');
+                const esBtn = document.querySelector('.lang-btn.es-flag');
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                if (savedLang === 'es' && esBtn) esBtn.classList.add('active');
+                else if (usBtn) usBtn.classList.add('active');
+            }
+        }
+        
+        // Load header and footer when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load header first, then footer
+            loadInclude('header.html', 'e33-navbar-placeholder');
+            loadInclude('footer.html', 'e33-footer-placeholder');
+        });
+        
+        // Header two-state: alterna la clase que redefine los tokens (alto/logo) al hacer scroll
+        function updateHeaderScrollState() {
+            document.body.classList.toggle('e33-header-scrolled', window.scrollY > 0);
+        }
+        window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
+        updateHeaderScrollState();
+        
+        // Language switcher functionality
+        function setLanguage(lang) {
+            // Update lang attribute
+            document.documentElement.lang = lang;
+            
+            // Store preference in localStorage
+            localStorage.setItem('e33-language', lang);
+            
+            // Update active flag - resolved by selector, no dependency on the global event object
+            const usBtn = document.querySelector('.lang-btn.us-flag');
+            const esBtn = document.querySelector('.lang-btn.es-flag');
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            if (lang === 'es' && esBtn) esBtn.classList.add('active');
+            else if (usBtn) usBtn.classList.add('active');
+            
+            console.log('Language set to:', lang);
+        }
+    </script>
+</body>
+</html>

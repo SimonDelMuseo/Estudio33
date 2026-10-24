@@ -1,0 +1,56 @@
+<!-- header.html - Estudio33 Header -->
+<nav class="navbar navbar-expand-xl e33-navbar" id="e33-navbar">
+    <div class="container-fluid e33-navbar-inner">
+        
+        <!-- Brand -->
+        <a class="navbar-brand e33-brand" href="index.html">
+            <img src="assets/images/E33-Logo-transpartente-62-x-248.png" alt="Estudio33" class="e33-brand-logo">
+        </a>
+        
+        <!-- Hamburger: bajo xl el nav entero se colapsa en este botón -->
+        <button class="navbar-toggler e33-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#e33-menu" aria-controls="e33-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="e33-toggler-bar"></span>
+            <span class="e33-toggler-bar"></span>
+            <span class="e33-toggler-bar"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="e33-menu">
+        <!-- Menu items -->
+        <div class="menu-items uppercase-text ms-auto">
+            <a class="menu-item" href="services.html">SERVICES</a>
+            <div class="dropdown">
+                <a class="dropdown-toggle uppercase-text" href="obs-resources.html">
+                    OBS RESOURCES
+                </a>
+                <div class="dropdown-content">
+                    <a href="plugins.html">PLUGINS</a>
+                    <a href="sources.html">SOURCES</a>
+                    <a href="shaders.html">SHADERS</a>
+                    <a href="scripts.html">SCRIPTS</a>
+                    <a href="themes.html">THEMES</a>
+                </div>
+            </div>
+            <a class="menu-item" href="about-us.html">ABOUT US</a>
+            <a class="menu-item" href="contact.html">CONTACT</a>
+            <span class="menu-item">SUPPORT</span>
+            <img class="menu-cart-icon" src="assets/images/cart-icon.svg" alt="Cart">
+            </div>
+        
+        <!-- Language switcher -->
+        <div class="lang-switcher">
+            <button class="lang-btn active us-flag" aria-label="English" onclick="setLanguage('en')"><img src="assets/images/flag-us.png" alt=""></button>
+            <button class="lang-btn es-flag" aria-label="Español" onclick="setLanguage('es')"><img src="assets/images/flag-es.png" alt=""></button>
+        </div>
+        </div><!-- /e33-menu -->
+        
+    </div>
+</nav>
+
+<!-- Subheader: barra de 12px justo debajo del header, visible en todas las páginas -->
+<div class="e33-subheader">
+    <span class="e33-subheader-text">Development of audiovisual and design projects</span>
+    <div class="e33-subheader-icons">
+        <img src="assets/images/youtube-icon.svg" alt="YouTube">
+        <img src="assets/images/github-icon.svg" alt="GitHub">
+    </div>
+</div>

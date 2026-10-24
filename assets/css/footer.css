@@ -1,0 +1,47 @@
+/* footer.css - Estudio33 Footer Styles */
+/* Estilos individuales para el footer, sin afectar el resto */
+
+/* El wrapper del placeholder (hijo directo de body) empuja el footer al
+   margen inferior cuando el contenido es más corto que el viewport.
+   Nota: margin-top sobre .e33-footer no servía porque .e33-footer está
+   dentro del wrapper, no es hijo directo del body. */
+body > footer {
+    margin-top: auto;
+    /* Defensa: el wrapper se pinta con el color del footer para que ningún
+       margen residual pueda dejar ver el fondo del body en su franja inferior */
+    /*background: var(--e33-bg); Por el momento se queda comentado ya que no está funcionando.*/
+}
+
+.e33-footer {
+    /* Alto fijo = header colapsado (token en e33-custom.css) + centrado vertical */
+    height: var(--e33-footer-height);
+    display: flex;
+    align-items: center;
+    background: var(--e33-bg);
+    border-top: 1px var(--e33-border-soft) solid;
+}
+
+.e33-footer-inner {
+    max-width: 100%;
+    text-align: center;
+}
+
+.e33-footer-text {
+    /* Bootstrap da margin-bottom: 1rem a los <p>; ese hueco se contenía dentro
+       del wrapper (flex item) y dejaba ver el fondo del body bajo el footer */
+    margin: 0;
+    color: white;
+    /* Tipografía del nav (Open Sans 13px / 800) + todo en mayúsculas */
+    font-family: var(--e33-header-font);
+    font-size: 0.8125rem;
+    font-weight: 800;
+    line-height: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Enlace @simondelmuseo: color de acento, sin hover */
+.e33-footer-text a {
+    color: var(--e33-accent);
+    text-decoration: none;
+}

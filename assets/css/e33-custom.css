@@ -1,0 +1,48 @@
+/* e33-custom.css - Estudio33 Custom Styles */
+/* Colors and Variables - Modo Oscuro */
+:root {
+    --e33-bg: #1b1b1b;
+    --e33-bg-alt: #252525;
+    --e33-surface: #313131;
+    --e33-surface-2: #3f3f3f;
+    --e33-text: #f8fafc;
+    --e33-text-alt: #a0aec0;
+    --e33-accent: #ffa760;
+    --e33-border-soft: #ffc392;
+    --e33-header-height: 70px;
+    --e33-header-logo: 60px;
+    --e33-header-font: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* Igual que el header colapsado: brand 34 + padding navbar 8+8 + borde 1 */
+    --e33-footer-height: 51px;
+}
+
+/* Estado del header con scroll (clase que alterna el JS de las páginas):
+   reduce alto y logo; sin la clase se mantiene el estado de reposo. */
+body.e33-header-scrolled {
+    --e33-header-height: 34px;
+    --e33-header-logo: 36px;
+}
+
+/* Base styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--e33-bg);
+    color: var(--e33-text);
+    background-image: url('../images/fondo-estudio33.png');
+    background-size: cover;
+    background-position: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Sticky footer: columna flex con altura mínima de viewport */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Ownership: header y footer son responsabilidad de header.css y footer.css
+   (dueño exclusivo de sus selectores). Este archivo contiene solo los tokens
+   (variables) y los estilos base del sitio. */

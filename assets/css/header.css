@@ -1,0 +1,257 @@
+/* header.css - Estudio33 Header Styles */
+
+/* Sticky: el wrapper del header se queda fijo arriba al hacer scroll */
+body > nav {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+.e33-navbar {
+    /* Tipografía de header estilo beautiful-jekyll (Open Sans) */
+    font-family: var(--e33-header-font);
+    background: var(--e33-bg);
+    border-bottom: 1px solid var(--e33-border-soft);
+    transition: background 0.3s ease;
+}
+
+.e33-navbar-inner {
+    max-width: 100%;
+}
+
+/* Subheader: barra de 12px justo debajo del header (misma línea inferior) */
+.e33-subheader {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    background: var(--e33-bg);
+    border-bottom: 1px solid var(--e33-border-soft);
+    overflow: hidden;
+    /* Misma transición que el header al hacer scroll (0.5s ease) */
+    transition: height 0.5s ease, border-bottom-color 0.5s ease;
+}
+
+/* Al hacer scroll el subheader se oculta por completo tras el header */
+body.e33-header-scrolled .e33-subheader {
+    height: 0;
+    border-bottom-color: transparent;
+}
+
+.e33-subheader-text {
+    font-family: var(--e33-header-font);
+    font-size: 14px;
+    line-height: 26px;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.e33-subheader-icons {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.e33-subheader-icons img {
+    display: block;
+    height: 18px;
+    width: auto;
+}
+
+.e33-brand {
+    height: var(--e33-header-height);
+    display: flex;
+    align-items: center;
+    transition: height 0.5s ease;
+}
+
+.e33-brand-logo {
+    /* Token: 60px en reposo; body.e33-header-scrolled lo redefine a 40px */
+    height: var(--e33-header-logo);
+    width: auto;
+    transition: height 0.5s ease;
+}
+
+/* Uppercase text menu - no links */
+.uppercase-text {
+    display: inline-flex;
+    /* Separación estilo beautiful-jekyll: va en el padding de cada item
+       (0.9375rem por lado = 30px entre textos), no en gap */
+    gap: 0;
+    align-items: center;
+}
+
+.menu-item {
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 0.9375rem;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.menu-item:hover {
+    color: var(--e33-accent);
+}
+
+/* beautiful-jekyll: el último item del nav sin padding derecho */
+/*.menu-items > :last-child {
+    padding-right: 0;
+}*/
+
+/* Hamburger: bajo xl el nav se colapsa en tres líneas gruesas blancas */
+.e33-toggler {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border: 0;
+    padding: 8px;
+}
+.e33-toggler:focus {
+    box-shadow: none;
+}
+.e33-toggler-bar {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 2px;
+}
+
+/* ── Punto de corte del colapso ───────────────────────────────────────────
+   Contenido: logo (~240px) + marca + menú (~651px) + banderas + paddings
+   ≈ 1003px, así que "cerca de tocar el logo" ≈ 1060px.
+   Bootstrap colapsa a 1200px (xl) → demasiado pronto. Aquí se replica el
+   comportamiento expandido de Bootstrap en el rango [1060px, 1200px).
+   Si quieres el corte antes/después: cambia AMBOS números (1060 y 1059.98). */
+@media (min-width: 1060px) and (max-width: 1199.98px) {
+    .navbar-expand-xl .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto;
+    }
+    .navbar-expand-xl .navbar-toggler {
+        display: none;
+    }
+}
+
+/* ── Menú vertical al desplegar la hamburguesa (zona < 1060px) ───────────
+   Misma plantilla HTML, el CSS la gira a columna:
+   SERVICES / OBS RESOURCES / ABOUT US / ... — sin clonar el menú. */
+@media (max-width: 1059.98px) {
+    #e33-menu .menu-items {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #e33-menu .menu-item,
+    #e33-menu .dropdown-toggle {
+        padding: 10px 0;
+    }
+    #e33-menu .menu-cart-icon {
+        padding: 10px 0;
+    }
+}
+
+/* Icono de carrito tras SUPPORT (sin vincular, solo visual) */
+.menu-cart-icon {
+    height: 18px;
+    width: auto;
+    /* Misma distancia que SUPPORT-carrito (30px) hasta las banderas */
+    padding: 0 1.875rem 0 0.9375rem;
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    /* Anula la apariencia nativa del <button> (fondo gris-blanco y borde):
+       debe verse el fondo del header a través de él */
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 0.9375rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+    color: var(--e33-accent);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    /* Exactamente el mismo color de fondo que el header (--e33-bg) */
+    background: var(--e33-bg);
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+    padding: 8px 0;
+}
+
+.dropdown-content a {
+    color: var(--e33-text);
+    padding: 8px 20px;
+    text-decoration: none;
+    display: block;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.dropdown-content a:hover {
+    color: var(--e33-accent);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropdown-toggle {
+    color: var(--e33-accent);
+}
+
+/* Language switcher */
+.lang-switcher {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.lang-btn {
+    /* Solo la imagen de la bandera: sin círculo, sin borde, sin relleno, sin hover.
+       Alto 16px = 2px menos que el carrito (18px) */
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Imagen de la bandera dentro del botón (archivo en assets/images) */
+.lang-btn img {
+    display: block;
+    height: 16px;
+    width: auto;
+}
