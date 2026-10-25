@@ -55,6 +55,12 @@ body.e33-header-scrolled .e33-subheader {
     gap: 10px;
 }
 
+/* Enlaces de los iconos (sin subrayar) */
+.e33-subheader-icons a {
+    display: block;
+    text-decoration: none;
+}
+
 .e33-subheader-icons img {
     display: block;
     height: 18px;

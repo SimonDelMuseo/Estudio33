@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudio33 - Web Platform</title>
+    <title>Estudio33 - Plataforma Web</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +26,7 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/i18n.js"></script>
     
     <script>
         // Function to load an HTML file and inject it into a target element
@@ -40,17 +41,13 @@
                 .catch(error => console.error(`Error loading ${url}:`, error));
         }
         
-        // Initialize language flags (called after includes load)
+        // Initialize language (called after includes load): traducción + bandera activa
         function initLanguageFlags() {
-            const savedLang = localStorage.getItem('e33-language');
-            if (savedLang) {
-                document.documentElement.lang = savedLang;
-                const usBtn = document.querySelector('.lang-btn.us-flag');
-                const esBtn = document.querySelector('.lang-btn.es-flag');
-                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-                if (savedLang === 'es' && esBtn) esBtn.classList.add('active');
-                else if (usBtn) usBtn.classList.add('active');
-            }
+            const savedLang = localStorage.getItem('e33-language') || 'es';
+            applyLanguage(savedLang);
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.querySelector(savedLang === 'es' ? '.lang-btn.es-flag' : '.lang-btn.us-flag');
+            if (activeBtn) activeBtn.classList.add('active');
         }
         
         // Load header and footer when DOM is ready
@@ -67,21 +64,10 @@
         window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
         updateHeaderScrollState();
         
-        // Language switcher functionality
+        // Language switcher: guarda la preferencia y reaplica todo (bandera + textos + title)
         function setLanguage(lang) {
-            // Update lang attribute
-            document.documentElement.lang = lang;
-            
-            // Store preference in localStorage
             localStorage.setItem('e33-language', lang);
-            
-            // Update active flag - resolved by selector, no dependency on the global event object
-            const usBtn = document.querySelector('.lang-btn.us-flag');
-            const esBtn = document.querySelector('.lang-btn.es-flag');
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            if (lang === 'es' && esBtn) esBtn.classList.add('active');
-            else if (usBtn) usBtn.classList.add('active');
-            
+            initLanguageFlags();
             console.log('Language set to:', lang);
         }
     </script>
