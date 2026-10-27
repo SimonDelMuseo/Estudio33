@@ -2,13 +2,14 @@
 /* Colors and Variables - Modo Oscuro */
 :root {
     --e33-bg: #1b1b1b;
-    --e33-bg-alt: #252525;
+    --e33-bg-alt: #1f1e1e;
     --e33-surface: #313131;
     --e33-surface-2: #3f3f3f;
     --e33-text: #f8fafc;
     --e33-text-alt: #a0aec0;
     --e33-accent: #ffa760;
     --e33-border-soft: #ffc392;
+    --e33-border-soft1: #8ff5f6;
     --e33-header-height: 70px;
     --e33-header-logo: 60px;
     --e33-header-font: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -41,6 +42,67 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
+}
+
+/* El main estira entre header y footer (el footer mantiene margin-top:auto como red) */
+main {
+    flex: 1;
+}
+
+/* Panel de contenido: superficie traslúcida del ancho de .container, con fondo
+   visible por los lados, bordes laterales de 1px y SIN bordes superior/inferior
+   (queda pegado al píxel al header arriba y al footer abajo) */
+.content-panel {
+    background: color-mix(in srgb, var(--e33-bg-alt) 70%, transparent);
+    border-left: 1px solid var(--e33-border-soft1);
+    border-right: 1px solid var(--e33-border-soft1);
+    padding: 2rem;
+    /* Sombra lateral: sensación de profundidad a izquierda y derecha */
+    box-shadow: -18px 0 30px -18px rgba(0, 0, 0, 0.55),
+                 18px 0 30px -18px rgba(0, 0, 0, 0.55);
+}
+
+/* Título gráfico del panel (mosca): centrado */
+.content-panel-title {
+    display: block;
+    margin: 0 auto 1.5rem;
+}
+
+/* Tipografía del contenido */
+.content-panel h1 {
+    color: var(--e33-text);
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+}
+
+.content-panel h2 {
+    color: var(--e33-accent);
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.content-panel p,
+.content-panel ul {
+    color: var(--e33-text);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+}
+
+.content-panel li {
+    margin-bottom: 0.35rem;
+}
+
+.content-panel li::marker {
+    color: var(--e33-accent);
+}
+
+.content-panel em {
+    color: var(--e33-text-alt);
+}
+
+.e33-text-accent {
+    color: var(--e33-accent);
 }
 
 /* Ownership: header y footer son responsabilidad de header.css y footer.css
